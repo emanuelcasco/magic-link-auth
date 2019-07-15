@@ -1,9 +1,12 @@
-const jwt = require('jsonwebtoken');
+import * as jwt from 'jsonwebtoken';
 
-const config = require('../config');
+import config from '../config';
 
 exports.encode = email => {
-  return jwt.sign({ email }, config.secret)
+  return jwt.sign({ email }, config.auth.secret)
 };
 
-exports.decode = token => jwt.verify(token, config.secret);
+exports.decode = token => {
+  console.log(config);
+  return jwt.verify(token, config.auth.secret);
+};

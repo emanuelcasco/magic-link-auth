@@ -1,8 +1,9 @@
-require('dotenv/config');
-const bodyParser = require('body-parser');
-const express = require('express');
+import 'dotenv/config';
 
-const sessionController = require('./app/controllers/session');
+import bodyParser from 'body-parser';
+import express from 'express';
+
+import sessionController from './app/controllers/session';
 
 const port = process.env.PORT || 8080;
 

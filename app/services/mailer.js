@@ -1,8 +1,8 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-const { mailer } = require('../config');
+import config from '../config';
 
-const transporter = nodemailer.createTransport(mailer);
+const transporter = nodemailer.createTransport(config.mailer);
 
 exports.sendEmail = options => {
   return new Promise(resolve => {

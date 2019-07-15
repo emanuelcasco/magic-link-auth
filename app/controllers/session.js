@@ -1,7 +1,7 @@
-const { encode, decode } = require('../services/jwt');
-const { sendEmail } = require('../services/mailer');
+import { encode, decode } from '../services/jwt';
+import { sendEmail } from '../services/mailer';
 
-const config = require('../config');
+import config from '../config';
 
 const generateBody = ({ email, link }) => `
   <p>Hi, <b>${email}</b>!</p>
@@ -20,7 +20,7 @@ exports.login = (req, res) => {
     from: 'My application',
     to: email,
     subject: 'Magic invitation',
-    html: generateBody({ email, link: `${config.hostname}/magic_link?token=${token}` })
+    html: generateBody({ email, link: `${config.common.hostname}/magic_link?token=${token}` })
   };
 
   return sendEmail(mailOptions)
@@ -37,9 +37,9 @@ exports.magicLink = (req, res) => {
     if (!email) {
       return res.status(401).send({ message: 'Authentication failed' });
     }
-
-    return res.set(config.authHeader, token).status(200).send({ message: 'Succesfully authenticated', email });
+    return res.set(config.auth.header, token).status(200).send({ message: 'Succesfully authenticated', email });
   } catch (error) {
+    console.log(error);
     return res.status(400).send({ message: 'Invalid token' });
   }
 };

@@ -1,9 +1,13 @@
-const { hostname } = require('os');
+import { hostname } from 'os';
 
-module.exports = {
-  authHeader: 'Authorization',
-  secret: process.env.NODE_JWT_SECRET,
-  hostname: hostname(),
+export default {
+  auth: {
+    header: 'Authorization',
+    secret: process.env.NODE_JWT_SECRET
+  },
+  common: {
+    hostname: hostname()
+  },
   mailer: {
     service: process.env.NODE_MAILER_SERVICE,
     auth: {
@@ -11,4 +15,4 @@ module.exports = {
       pass: process.env.NODE_MAILER_PASS
     }
   }
-}
+};
